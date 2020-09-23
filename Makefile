@@ -1,9 +1,9 @@
 CC = gcc
-CFLAGS =
+CFLAGS = -Wall -Wextra -ansi -pedantic -g
 EXEC = main
-SRC_LABYRINTHE = ./src/labyrinthe
-OBJ_LABYRINTHE = $(SRC_LABYRINTHE)/generator_labyrinthe.o $(SRC_LABYRINTHE)/generator_labyrinthe.h $(SRC_LABYRINTHE)/print_labyrinthe.o $(SRC_LABYRINTHE)/print_labyrinthe.h $(SRC_LABYRINTHE)/struct_labyrinthe.o $(SRC_LABYRINTHE)/struct_labyrinthe.h
-OBJ = ./src/main.o $(OBJ_LABYRINTHE)
+SRC_LABYRINTH = ./src/labyrinth
+OBJ_LABYRINTH = $(SRC_LABYRINTH)/generator_labyrinth.o $(SRC_LABYRINTH)/generator_labyrinth.h $(SRC_LABYRINTH)/print_labyrinth.o $(SRC_LABYRINTH)/print_labyrinth.h $(SRC_LABYRINTH)/struct_labyrinth.o $(SRC_LABYRINTH)/struct_labyrinth.h
+OBJ = ./src/main.o $(OBJ_LABYRINTH)
 
 $(EXEC): $(OBJ)
 	$(CC) $(CFLAGS) $^ -o $(EXEC)
@@ -11,16 +11,22 @@ $(EXEC): $(OBJ)
 main.o: ./src/main.c
 	$(CC) $(CFLAGS) $< -c
 
-generator_labyrinthe.o: $(SRC_LABYRINTHE)/generator_labyrinthe.c $(SRC_LABYRINTHE)/generator_labyrinthe.h $(SRC_LABYRINTHE)/struct_labyrinthe.h $(SRC_LABYRINTHE)/print_labyrinthe.h
+generator_labyrinth.o: $(SRC_LABYRINTH)/generator_labyrinth.c $(SRC_LABYRINTH)/generator_labyrinth.h $(SRC_LABYRINTH)/struct_labyrinth.h $(SRC_LABYRINTH)/print_labyrinth.h
 	$(CC) $(CFLAGS) $< -c
 
-print_labyrinthe.o: $(SRC_LABYRINTHE)/print_labyrinthe.c $(SRC_LABYRINTHE)/struct_labyrinthe.h $(SRC_LABYRINTHE)/print_labyrinthe.h
+print_labyrinth.o: $(SRC_LABYRINTH)/print_labyrinth.c $(SRC_LABYRINTH)/struct_labyrinth.h $(SRC_LABYRINTH)/print_labyrinth.h
 	$(CC) $(CFLAGS) $< -c
 
-struct_labyrinthe.o: $(SRC_LABYRINTHE)/struct_labyrinthe.c $(SRC_LABYRINTHE)/struct_labyrinthe.h
+struct_labyrinth.o: $(SRC_LABYRINTH)/struct_labyrinth.c $(SRC_LABYRINTH)/struct_labyrinth.h
 	$(CC) $(CFLAGS) $< -c
 
 clean:
-	rm -r *.o ./src/*.o ./src/labyrinthe/*.o
+	rm *.o ./src/*.o ./src/labyrinth/*.o
 
-.PHONY: clean
+test:
+	@(cd ./test && $(MAKE))
+
+test_clean:
+	rm ./test/*.o ./test/labyrinth/*.o
+
+.PHONY: clean test

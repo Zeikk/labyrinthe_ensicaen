@@ -1,5 +1,5 @@
-#ifndef STRUCT_LABYRINTHE
-#define STRUCT_LABYRINTHE
+#ifndef STRUCT_LABYRINTH
+#define STRUCT_LABYRINTH
 
 
 typedef struct {
@@ -13,7 +13,7 @@ typedef struct {
     int width;
 } dimension;
 
-cell** get_labyrinthe(dimension size);
+cell** get_labyrinth(dimension size);
 
 
 #endif

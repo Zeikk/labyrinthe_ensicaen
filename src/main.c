@@ -1,20 +1,29 @@
-#include "./labyrinthe/generator_labyrinthe.h"
-#include "./labyrinthe/print_labyrinthe.h"
-#include "./labyrinthe/struct_labyrinthe.h"
+#include "./labyrinth/generator_labyrinth.h"
+#include "./labyrinth/print_labyrinth.h"
+#include "./labyrinth/struct_labyrinth.h"
 #include <stdlib.h>
 #include <stdio.h>
 
 int main(void) {
     
-	dimension size = {9,23};
-    cell  **labyrinthe = get_labyrinthe(size);
-	if(labyrinthe == NULL) {
-        perror("Erreur de création du labyrinthe");
+	int length = 97;
+	int width = 93;
+
+	dimension size;
+	cell  **labyrinth;
+
+	size.length = length;
+	size.width = width;
+
+    labyrinth = get_labyrinth(size);
+
+	if(labyrinth == NULL) {
+        perror("Error creation labyrinth");
 		return EXIT_FAILURE;
 	}
 
-	generate_labyrinthe(labyrinthe, size);
-	afficher_lab(labyrinthe, size);
+	generate_labyrinth(labyrinth, size);
+	print_labyrinth(labyrinth, size);
 
 	return EXIT_SUCCESS;
 }
