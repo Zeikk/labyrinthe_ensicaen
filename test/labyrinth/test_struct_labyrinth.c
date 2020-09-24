@@ -3,6 +3,7 @@
 #include "../../src/labyrinth/struct_labyrinth.h"
 
 static dimension size_labyrinth;
+static cell **test_labyrinth;
 
 void test_setup(void) {
 
@@ -10,6 +11,8 @@ void test_setup(void) {
     int width = 3;
     size_labyrinth.length = length;
     size_labyrinth.width = width;
+
+    test_labyrinth = get_labyrinth(size_labyrinth);
 }
 
 MU_TEST(test_struct_size) {
@@ -45,17 +48,16 @@ MU_TEST(test_get_labyrinth_should_fail) {
     size_fail.length = -1;
     labyrinth_fail = get_labyrinth(size_fail);
     
-    mu_assert(labyrinth_fail == NULL, "labyrinth sould not be correctly created");
+    mu_assert(labyrinth_fail == NULL, "labyrinth should not be correctly created");
 }
 
-
 MU_TEST_SUITE(test_suite) {
+    
 	MU_SUITE_CONFIGURE(&test_setup, NULL);
 
 	MU_RUN_TEST(test_struct_size);
 	MU_RUN_TEST(test_get_labyrinth);
 	MU_RUN_TEST(test_get_labyrinth_should_fail);
-
 
 }
 

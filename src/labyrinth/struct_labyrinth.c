@@ -24,3 +24,12 @@ cell** get_labyrinth(dimension size) {
     return labyrinth;
 }
 
+void free_labyrinth(cell **labyrinth, dimension size) {
+
+    int i;
+    for(i = 0; i<size.length; i++) {
+        free(labyrinth[i]);
+    }
+
+    free(labyrinth);
+}

@@ -14,6 +14,6 @@ typedef struct {
 } dimension;
 
 cell** get_labyrinth(dimension size);
-
+void free_labyrinth(cell **labyrinth, dimension size);
 
 #endif

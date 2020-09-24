@@ -6,8 +6,8 @@
 
 int main(void) {
     
-	int length = 97;
-	int width = 93;
+	int length = 9;
+	int width = 23;
 
 	dimension size;
 	cell  **labyrinth;
@@ -18,12 +18,13 @@ int main(void) {
     labyrinth = get_labyrinth(size);
 
 	if(labyrinth == NULL) {
-        perror("Error creation labyrinth");
+        perror("Error labyrinth's creation");
 		return EXIT_FAILURE;
 	}
 
 	generate_labyrinth(labyrinth, size);
 	print_labyrinth(labyrinth, size);
-
+	free_labyrinth(labyrinth, size);
+	
 	return EXIT_SUCCESS;
 }
