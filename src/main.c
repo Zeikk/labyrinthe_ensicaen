@@ -7,24 +7,30 @@
 int main(void) {
     
 	int length = 9;
-	int width = 23;
+	int width = 27;
 
-	dimension size;
+	parameters_labyrinth parameters;
 	cell  **labyrinth;
 
-	size.length = length;
-	size.width = width;
+	parameters.start_labyrinth.length = 1;
+	parameters.start_labyrinth.width = 0;
 
-    labyrinth = get_labyrinth(size);
+	parameters.end_labyrinth.length = length-2;
+	parameters.end_labyrinth.width = width-1;
+
+	parameters.size.length = length;
+	parameters.size.width = width;
+
+    labyrinth = get_labyrinth(parameters.size);
 
 	if(labyrinth == NULL) {
         perror("Error labyrinth's creation");
 		return EXIT_FAILURE;
 	}
 
-	generate_labyrinth(labyrinth, size);
-	print_labyrinth(labyrinth, size);
-	free_labyrinth(labyrinth, size);
+	generate_labyrinth(labyrinth, parameters);
+	print_labyrinth(labyrinth, parameters.size);
+	free_labyrinth(labyrinth, parameters.size);
 	
 	return EXIT_SUCCESS;
 }

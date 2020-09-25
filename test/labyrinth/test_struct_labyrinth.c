@@ -5,7 +5,7 @@
 static dimension size_labyrinth;
 static cell **test_labyrinth;
 
-void test_setup(void) {
+void test_setup_struct(void) {
 
     int length = 3;
     int width = 3;
@@ -29,7 +29,6 @@ MU_TEST(test_struct_size) {
 
     mu_assert(size.length == length, "size.length is not equal to length");
     mu_assert(size.width == width, "size.width is not equal to width");
-
 }
 
 MU_TEST(test_get_labyrinth) {
@@ -53,7 +52,7 @@ MU_TEST(test_get_labyrinth_should_fail) {
 
 MU_TEST_SUITE(test_suite) {
     
-	MU_SUITE_CONFIGURE(&test_setup, NULL);
+	MU_SUITE_CONFIGURE(&test_setup_struct, NULL);
 
 	MU_RUN_TEST(test_struct_size);
 	MU_RUN_TEST(test_get_labyrinth);

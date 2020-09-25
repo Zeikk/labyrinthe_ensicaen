@@ -21,12 +21,12 @@ struct_labyrinth.o: $(SRC_LABYRINTH)/struct_labyrinth.c $(SRC_LABYRINTH)/struct_
 	$(CC) $(CFLAGS) $< -c
 
 clean:
-	rm *.o ./src/*.o ./src/labyrinth/*.o
+	rm *.o ./src/*.o ./src/labyrinth/*.o ./test/*.o ./test/labyrinth/*.o
 
 test:
 	@(cd ./test && $(MAKE))
 
-test_clean:
-	rm ./test/*.o ./test/labyrinth/*.o
+clean_exec:
+	rm $(EXEC) ./test/$(EXEC)_test
 
-.PHONY: clean test
+.PHONY: clean test clean_exec
