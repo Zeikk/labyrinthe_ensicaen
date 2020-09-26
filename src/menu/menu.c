@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include "./menu.h"
 #include "../utils/utils.h"
 
@@ -22,9 +23,14 @@ int scan_menu(void) {
 
 }
 
-int display_menu(void){
+int display_menu(char *filename){
 
+    system("clear");
     printf("\n######### Menu de démarrage #########\n\n");
+
+    if(filename != NULL) {
+        printf("Labyrinthe chargé: %s \n", filename);
+    }
 
     printf("1. Créer labyrinthe \n");
     printf("2. Charger labyrinthe \n");
