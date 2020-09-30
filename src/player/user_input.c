@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
+#include <dirent.h>
 #include "./user_input.h"
 #include "../labyrinth/struct_labyrinth.h"
 #include "../utils/utils.h"
@@ -27,16 +28,40 @@ dimension choose_dimension() {
     return size;
 }
 
-char* choose_labyrinth_name() {
+void display_save_directory() {
 
-    char tmp_labyrinth_name[100];
+    struct dirent *dir;
+    
+    DIR *save_directory = opendir("./saves"); 
+    if (save_directory)
+    {
+        printf("Liste des labyrinthes: \n");
+
+        while ((dir = readdir(save_directory)) != NULL)
+        {
+            if(strcmp(dir->d_name, "." ) != 0 && strcmp(dir->d_name, "..") != 0) {
+                printf("- %s\n", dir->d_name);
+            }
+        }
+        closedir(save_directory);
+    }
+    printf("\n");
+}
+
+char* choose_labyrinth_name(int mode) {
+
+    char tmp_labyrinth_name[200];
     char* labyrinth_name;
     int size_name;
 
     system("clear");
     printf("######### Choix du nom #########\n\n");
 
-    printf("Saisir le nom du labyrinth: \n");
+    if(mode) {
+        display_save_directory();
+    }
+
+    printf("Saisir le nom du labyrinth (sans extension): \n");
     scanf("%s", tmp_labyrinth_name);
     clean_buffer();
 

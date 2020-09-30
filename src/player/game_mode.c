@@ -13,7 +13,7 @@ char* create_labyrinth(cell **labyrinth, parameters_labyrinth parameters) {
 	char* filename;
 
 	parameters.size = choose_dimension();
-	filename = choose_labyrinth_name();
+	filename = choose_labyrinth_name(0);
 
     if(labyrinth == NULL ) {
     	labyrinth = get_labyrinth(parameters.size);
@@ -40,13 +40,13 @@ char* create_labyrinth(cell **labyrinth, parameters_labyrinth parameters) {
 void load_labyrinth(char *filename, cell **labyrinth, parameters_labyrinth parameters) {
 
 
-	/*do {*/
+	do {
 
-		filename = choose_labyrinth_name();
+		filename = choose_labyrinth_name(1);
 		parameters = load_parameters(filename);
 		labyrinth = load_array(filename, parameters);
 
-	/*}while(labyrinth == NULL);*/
+	}while(labyrinth == NULL);
 
 	print_labyrinth(labyrinth, parameters.size);
 }
