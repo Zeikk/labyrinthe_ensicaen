@@ -9,9 +9,10 @@ int main(void) {
 
 	int choice = 0;
 	int win = 0;
-	cell **labyrinth;
+	cell **labyrinth = NULL;
 	parameters_labyrinth parameters;
 	char *filename = NULL;
+	char input;
 
 	while(!win) {
 		choice = display_menu(filename);
@@ -19,15 +20,15 @@ int main(void) {
 			
 			case 1:
 
-				filename = create_labyrinth();
+				filename = create_labyrinth(labyrinth, parameters);
 				printf("\nAppuyer pour revenir au menu\n");
-				scanf("");
+				scanf("%c", &input);
 				break;
 
 			case 2:
-
 				load_labyrinth(filename, labyrinth, parameters);
-				choice = display_menu(filename);
+				printf("\nAppuyer pour revenir au menu\n");
+				scanf("%c", &input);
 				break;
 				
 			case 3:
@@ -35,7 +36,7 @@ int main(void) {
 				break;
 
 			case 4:
-				exit_game();
+				exit_game(labyrinth, parameters);
 				break;
 
 			default: 
