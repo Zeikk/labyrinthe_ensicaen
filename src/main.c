@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include "./menu/menu.h"
 #include "./player/game_mode.h"
+#include "./player/user_input.h"
 #include "./labyrinth/struct_labyrinth.h"
 
 
@@ -19,24 +20,27 @@ int main(void) {
 		switch(choice) {
 			
 			case 1:
-
-				filename = create_labyrinth(labyrinth, parameters);
+				filename = choose_labyrinth_name(0);
+				labyrinth = create_labyrinth(parameters, filename);
 				printf("\nAppuyer pour revenir au menu\n");
 				scanf("%c", &input);
 				break;
 
 			case 2:
-				load_labyrinth(filename, labyrinth, parameters);
+				filename = choose_labyrinth_name(1);
+				load_labyrinth(filename, parameters);
 				printf("\nAppuyer pour revenir au menu\n");
 				scanf("%c", &input);
 				break;
 				
 			case 3:
-				play();
+				play(labyrinth, parameters);
+				printf("\nAppuyer pour revenir au menu\n");
+				scanf("%c", &input);
 				break;
 
 			case 4:
-				exit_game(labyrinth, parameters);
+				exit_game();
 				break;
 
 			default: 

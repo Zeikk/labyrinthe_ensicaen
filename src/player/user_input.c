@@ -72,3 +72,19 @@ char* choose_labyrinth_name(int mode) {
 
     return labyrinth_name;
 }
+
+
+char choose_move() {
+
+    char move;
+
+    printf("######### Choix du mouvement #########\n\n");
+
+    do{
+        printf("Saisir le déplacement (z/q/s/d): \n");
+        scanf("%c", &move);
+        clean_buffer();
+    }while(move != 'z' && move != 'q' && move != 's' && move != 'd');
+    
+    return move;
+}

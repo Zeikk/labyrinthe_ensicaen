@@ -1,17 +1,17 @@
 #ifndef STRUCT_LABYRINTH
 #define STRUCT_LABYRINTH
 
-
-typedef struct {
-    int value;
-    char symbol;
-    int containsPlayer;
-} cell;
-
 typedef struct {
     int length;
     int width;
 } dimension;
+
+typedef struct {
+    dimension coordinates;
+    int value;
+    char symbol;
+    int containsPlayer;
+} cell;
 
 typedef struct {
     dimension size;

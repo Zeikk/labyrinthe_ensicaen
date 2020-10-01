@@ -73,6 +73,7 @@ void save_labyrinth_file(char *filename, cell **labyrinth, parameters_labyrinth 
         }
     }
 
+    printf("Labyrinthe sauvegardé \n");
     fclose(file);
 }
 

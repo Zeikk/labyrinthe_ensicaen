@@ -44,7 +44,6 @@ void replace_cell(cell **labyrinth, dimension size, int new_value, int old_value
 
 void generate_labyrinth(cell **labyrinth, parameters_labyrinth parameters) {
 	
-	
 	int i;
 	int j;
 	int opening = 1; 
@@ -76,6 +75,9 @@ void generate_labyrinth(cell **labyrinth, parameters_labyrinth parameters) {
 				labyrinth[i][j].value = 0;
 			}
 			labyrinth[i][j].containsPlayer = 0;
+			labyrinth[i][j].coordinates.length = i;
+			labyrinth[i][j].coordinates.width = j;
+
 		}
 	}
 	

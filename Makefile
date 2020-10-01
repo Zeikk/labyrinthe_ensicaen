@@ -10,7 +10,8 @@ OBJ_UTILS = $(SRC_UTILS)/utils.o $(SRC_UTILS)/utils.h
 
 SRC_PLAYER = ./src/player
 OBJ_PLAYER = $(SRC_PLAYER)/game_mode.o $(SRC_PLAYER)/game_mode.h \
-$(SRC_PLAYER)/user_input.o $(SRC_PLAYER)/user_input.h
+$(SRC_PLAYER)/user_input.o $(SRC_PLAYER)/user_input.h \
+$(SRC_PLAYER)/player_action.o $(SRC_PLAYER)/player_action.h
 
 SRC_LABYRINTH = ./src/labyrinth
 OBJ_LABYRINTH = $(SRC_LABYRINTH)/generator_labyrinth.o \
@@ -44,8 +45,11 @@ file_labyrinth.o: $(SRC_LABYRINTH)/file_labyrinth.o $(SRC_LABYRINTH)/file_labyri
 user_input.o: $(SRC_PLAYER)/user_input.c $(SRC_PLAYER)/user_input.h $(SRC_LABYRINTH)/struct_labyrinth.h
 	$(CC) $(CFLAGS) $< -c
 
+player_action.o: $(SRC_PLAYER)/player_action.c $(SRC_PLAYER)/player_action.h $(SRC_LABYRINTH)/struct_labyrinth.h
+	$(CC) $(CFLAGS) $< -c
+
 game_mode.o: $(SRC_PLAYER)/game_mode.c $(SRC_PLAYER)/game_mode.h $(SRC_LABYRINTH)/struct_labyrinth.h\
-$(SRC_LABYRINTH)/generator_labyrinth.h $(SRC_LABYRINTH)/print_labyrinth.h
+$(SRC_LABYRINTH)/generator_labyrinth.h $(SRC_LABYRINTH)/print_labyrinth.h $(SRC_PLAYER)/player_action.h
 	$(CC) $(CFLAGS) $< -c
 
 menu.o: $(SRC_MENU)/menu.c $(SRC_MENU)/menu.h $(SRC_UTILS)/utils.h
