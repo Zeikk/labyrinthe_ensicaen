@@ -1,20 +1,29 @@
 #include "struct_labyrinth.h"
 #include <stdio.h>
 #include <string.h>
+#include <stdlib.h>
 
 FILE *init_file(char *filename, int read_file) {
 
     FILE *file;
-    char save_directory[] = "./saves/";
+    char directory[] = {"./saves/"};
+    char extension[] = {".cfg"};
+    char* save_directory = (char*)malloc(strlen(filename) + 1 + strlen(directory) + 1 + strlen(extension) + 1) ;
+    if(save_directory == NULL) {
+        perror("Error allocation");
+        return NULL;
 
+    }
+    strcpy(save_directory, directory);
     strcat(save_directory, filename);
-    strcat(save_directory, ".cfg");
+    strcat(save_directory, extension);
 
     if(read_file) {
 
         file = fopen(save_directory, "rb");
         if(file == NULL) {
             perror("Error file");
+            free(save_directory);
             return NULL;
         }
     } else {
@@ -25,10 +34,13 @@ FILE *init_file(char *filename, int read_file) {
             file = fopen(save_directory, "ab");
             if(file == NULL) {
                 perror("Error file");
+                free(save_directory);
                 return NULL;
             }
         }
     }
+
+    free(save_directory);
     
     return file;
 }
@@ -96,8 +108,9 @@ cell** load_array(char *filename, parameters_labyrinth parameters) {
     if(file == NULL) {
         return NULL;
     }
-
+    
     labyrinth = get_labyrinth(parameters.size);
+
     fseek(file, sizeof(parameters_labyrinth), SEEK_SET);
 
     for(i = 0; i<parameters.size.length; i++) {

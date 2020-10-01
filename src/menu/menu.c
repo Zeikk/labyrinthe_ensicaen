@@ -29,7 +29,7 @@ int display_menu(char *filename){
     printf("\n######### Menu de démarrage #########\n\n");
 
     if(filename != NULL) {
-        printf("Labyrinthe chargé: %s \n", filename);
+        printf("\nLabyrinthe chargé: %s \n\n", filename);
     }
 
     printf("1. Créer labyrinthe \n");

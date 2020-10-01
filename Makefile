@@ -55,7 +55,7 @@ utils.o: $(SRC_UTILS)/utils.c $(SRC_UTILS)/utils.h
 	$(CC) $(CFLAGS) $< -c
 
 clean:
-	rm ./src/*.o $(SRC_MENU)/*.o $(SRC_UTILS)/*.o $(SRC_PLAYER)/*.o $(SRC_LABYRINTH)/*.o ./test/*.o
+	rm ./src/*.o $(SRC_MENU)/*.o $(SRC_UTILS)/*.o $(SRC_PLAYER)/*.o $(SRC_LABYRINTH)/*.o ./test/*.o ./test/labyrinth/*.o
 
 test:
 	@(cd ./test && $(MAKE))
