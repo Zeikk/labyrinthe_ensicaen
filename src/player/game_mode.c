@@ -17,6 +17,7 @@ char* create_labyrinth() {
 	parameters.size = choose_dimension();
 	filename = choose_labyrinth_name();
 
+	
     parameters.start_labyrinth.length = 1;
 	parameters.start_labyrinth.width = 0;
 
@@ -30,9 +31,8 @@ char* create_labyrinth() {
 	}
 
 	generate_labyrinth(labyrinth, parameters);
-	print_labyrinth(labyrinth, parameters.size);
 	save_labyrinth_file(filename, labyrinth, parameters);
-	free_labyrinth(labyrinth, parameters.size);
+	/*free_labyrinth(labyrinth, parameters.size);*/
 
 	return filename;
 }
