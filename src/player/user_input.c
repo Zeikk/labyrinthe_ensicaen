@@ -48,6 +48,21 @@ void display_save_directory() {
     printf("\n");
 }
 
+void handle_error(char *filename) {
+
+    int i;
+    int j;
+    char wrong_chars[] = {'.', '/'};
+
+    for(i = 0; i<(int)strlen(filename); i++) {
+        for(j = 0; j<(int)strlen(wrong_chars); j++) {
+            if(filename[i] == wrong_chars[j]) {
+                filename[i] = '_';
+            }
+        }
+    }
+}
+
 char* choose_labyrinth_name(int mode) {
 
     char tmp_labyrinth_name[200];
@@ -62,13 +77,14 @@ char* choose_labyrinth_name(int mode) {
     }
 
     printf("Saisir le nom du labyrinth (sans extension): \n");
-    scanf("%s", tmp_labyrinth_name);
+    scanf("%[^\n]", tmp_labyrinth_name);
     clean_buffer();
 
     size_name = strlen(tmp_labyrinth_name) + 1;
     labyrinth_name = (char*)malloc(size_name * sizeof(char));
 
     strcpy(labyrinth_name, tmp_labyrinth_name);
+    handle_error(labyrinth_name);
 
     return labyrinth_name;
 }
