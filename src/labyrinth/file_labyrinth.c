@@ -22,7 +22,6 @@ FILE *init_file(char *filename, int read_file) {
 
         file = fopen(save_directory, "rb");
         if(file == NULL) {
-            perror("Error file");
             free(save_directory);
             return NULL;
         }
@@ -33,7 +32,6 @@ FILE *init_file(char *filename, int read_file) {
 
             file = fopen(save_directory, "ab");
             if(file == NULL) {
-                perror("Error file");
                 free(save_directory);
                 return NULL;
             }
@@ -73,7 +71,7 @@ void save_labyrinth_file(char *filename, cell **labyrinth, parameters_labyrinth 
         }
     }
 
-    printf("Labyrinthe sauvegardé \n");
+    printf("Labyrinthe sauvegardé: %s \n", filename);
     fclose(file);
 }
 

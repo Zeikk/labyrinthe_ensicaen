@@ -21,14 +21,18 @@ int main(void) {
 			
 			case 1:
 				filename = choose_labyrinth_name(0);
-				labyrinth = create_labyrinth(parameters, filename);
+				labyrinth = create_labyrinth(&parameters, filename);
 				printf("\nAppuyer pour revenir au menu\n");
 				scanf("%c", &input);
 				break;
 
 			case 2:
 				filename = choose_labyrinth_name(1);
-				load_labyrinth(filename, parameters);
+				labyrinth = load_labyrinth(filename, &parameters);
+				if(labyrinth == NULL) {
+					filename = NULL;
+				}
+				
 				printf("\nAppuyer pour revenir au menu\n");
 				scanf("%c", &input);
 				break;

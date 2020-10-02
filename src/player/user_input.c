@@ -78,7 +78,7 @@ char choose_move() {
 
     char move;
 
-    printf("######### Choix du mouvement #########\n\n");
+    printf("\n######### Choix du mouvement #########\n\n");
 
     do{
         printf("Saisir le déplacement (z/q/s/d): \n");

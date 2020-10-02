@@ -9,42 +9,43 @@
 #include "./player_action.h"
 
 
-cell** create_labyrinth(parameters_labyrinth parameters, char* filename) {
+cell** create_labyrinth(parameters_labyrinth *parameters, char* filename) {
 
 	cell **labyrinth;
 
-	parameters.size = choose_dimension();
-    labyrinth = get_labyrinth(parameters.size);
+	parameters->size = choose_dimension();
+    labyrinth = get_labyrinth(parameters->size);
 	
-    parameters.start_labyrinth.length = 1;
-	parameters.start_labyrinth.width = 0;
+    parameters->start_labyrinth.length = 1;
+	parameters->start_labyrinth.width = 0;
 
-	parameters.end_labyrinth.length = parameters.size.length-2;
-	parameters.end_labyrinth.width = parameters.size.width-1;
+	parameters->end_labyrinth.length = parameters->size.length-2;
+	parameters->end_labyrinth.width = parameters->size.width-1;
 
 	if(labyrinth == NULL) {
         perror("Error labyrinth's creation");
 		return NULL;
 	}
 
-	generate_labyrinth(labyrinth, parameters);
-	save_labyrinth_file(filename, labyrinth, parameters);
-	print_labyrinth(labyrinth, parameters.size);
+	generate_labyrinth(labyrinth, *parameters);
+	save_labyrinth_file(filename, labyrinth, *parameters);
+	print_labyrinth(labyrinth, parameters->size);
 
 	return labyrinth;
 }
 
-cell** load_labyrinth(char *filename, parameters_labyrinth parameters) {
+cell** load_labyrinth(char *filename, parameters_labyrinth *parameters) {
 
 	cell **labyrinth;
-	do {
 
-		parameters = load_parameters(filename);
-		labyrinth = load_array(filename, parameters);
+	*parameters = load_parameters(filename);
+	labyrinth = load_array(filename, *parameters);
+	if(labyrinth == NULL) {
+		printf("Le labyrinthe n'existe pas \n");
+		return NULL;
+	}
 
-	}while(labyrinth == NULL);
-
-	print_labyrinth(labyrinth, parameters.size);
+	print_labyrinth(labyrinth, parameters->size);
 	return labyrinth;
 }
 
