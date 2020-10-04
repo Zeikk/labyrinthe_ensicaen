@@ -3,6 +3,6 @@
 
 #include "../labyrinth/struct_labyrinth.h"
 
-void move(cell **labyrinth, parameters_labyrinth parameters);
+int move(cell **labyrinth, parameters_labyrinth parameters);
 
 #endif

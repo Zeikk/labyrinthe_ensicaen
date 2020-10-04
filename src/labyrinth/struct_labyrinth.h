@@ -11,6 +11,7 @@ typedef struct {
     int value;
     char symbol;
     int containsPlayer;
+    int is_special;
 } cell;
 
 typedef struct {

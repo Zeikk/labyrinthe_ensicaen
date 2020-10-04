@@ -33,13 +33,15 @@ void display_save_directory() {
     struct dirent *dir;
     
     DIR *save_directory = opendir("./saves"); 
-    if (save_directory)
-    {
+    char *extension;
+
+    if (save_directory) {
         printf("Liste des labyrinthes: \n");
 
-        while ((dir = readdir(save_directory)) != NULL)
-        {
-            if(strcmp(dir->d_name, "." ) != 0 && strcmp(dir->d_name, "..") != 0) {
+        while ((dir = readdir(save_directory)) != NULL) {
+
+            extension = strrchr(dir->d_name, '.');
+            if(strcmp(dir->d_name, "." ) != 0 && strcmp(dir->d_name, "..") != 0 && strcmp(extension, ".score") != 0) {
                 printf("- %s\n", dir->d_name);
             }
         }
@@ -70,7 +72,7 @@ char* choose_labyrinth_name(int mode) {
     int size_name;
 
     system("clear");
-    printf("######### Choix du nom #########\n\n");
+    printf("######### Choix du nom du labyrinthe #########\n\n");
 
     if(mode) {
         display_save_directory();
@@ -89,6 +91,27 @@ char* choose_labyrinth_name(int mode) {
     return labyrinth_name;
 }
 
+char* choose_player_name() {
+
+    char tmp_player_name[100];
+    char* player_name;
+    int size_name;
+
+    system("clear");
+    printf("######### Choix du nom de joueur #########\n\n");
+
+    printf("Saisir votre nom de joueur: \n");
+    scanf("%[^\n]", tmp_player_name);
+    clean_buffer();
+
+    size_name = strlen(tmp_player_name) + 1;
+    player_name = (char*)malloc(size_name * sizeof(char));
+
+    strcpy(player_name, tmp_player_name);
+    handle_error(player_name);
+
+    return player_name;
+}
 
 char choose_move() {
 

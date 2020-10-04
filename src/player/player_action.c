@@ -26,25 +26,46 @@ int is_win(cell player_cell, parameters_labyrinth parameters) {
     && player_cell.coordinates.width == parameters.end_labyrinth.width;
 }
 
+int check_is_special(cell* cell_check) {
+
+    if(cell_check->is_special == 1) {
+        cell_check->is_special = 0;
+        return cell_check->value;
+
+    } else if(cell_check->is_special == -1) {
+        cell_check->is_special = 0;
+        return cell_check->value * -1;
+    }
+
+    return 0;
+}
+
 int move_player(char move, cell* player_cell, cell **labyrinth, cell first_cell) {
 
     cell* left_cell = &labyrinth[player_cell->coordinates.length][player_cell->coordinates.width - 1];
     cell* right_cell = &labyrinth[player_cell->coordinates.length][player_cell->coordinates.width + 1];
     cell* top_cell = &labyrinth[player_cell->coordinates.length - 1][player_cell->coordinates.width];
     cell* bot_cell = &labyrinth[player_cell->coordinates.length + 1][player_cell->coordinates.width];
+    int cell_value = 0;
 
     switch(move) {
 
         case 'z':
             if(top_cell->value != -1 && top_cell->value != 0) {
+
                 top_cell->containsPlayer = 1;
+                cell_value = check_is_special(top_cell);
+
             } else {
                 return 0;
             }
             break;
         case 's':
             if(bot_cell->value != -1 && bot_cell->value != 0) {
+
                 bot_cell->containsPlayer = 1;
+                cell_value = check_is_special(bot_cell);
+
             } else {
                 return 0;
             }
@@ -53,14 +74,20 @@ int move_player(char move, cell* player_cell, cell **labyrinth, cell first_cell)
             if(left_cell->value != -1 && left_cell->value != 0
             && (player_cell->coordinates.length != first_cell.coordinates.length
             || player_cell->coordinates.width != first_cell.coordinates.width)) {
+
                 left_cell->containsPlayer = 1;
+                cell_value = check_is_special(left_cell);
+
             } else {
                 return 0;
             }
             break;
         case 'd':
             if(right_cell->value != -1 && right_cell->value != 0) {
+
                 right_cell->containsPlayer = 1;
+                cell_value = check_is_special(right_cell);
+
             } else {
                 return 0;
             }
@@ -70,33 +97,37 @@ int move_player(char move, cell* player_cell, cell **labyrinth, cell first_cell)
     }
 
     player_cell->containsPlayer = 0;
-    return 1;
+    return cell_value;
 }
 
-void move(cell **labyrinth, parameters_labyrinth parameters) {
+int move(cell **labyrinth, parameters_labyrinth parameters) {
 
     char move;
     cell* player_cell;
+    int score = 0;
 
     if(labyrinth == NULL ) {
         perror("Labyrinth empty");
-        return;
+        return 0;
     }
 
     player_cell = get_player(labyrinth, parameters.size);
     while(is_win(*player_cell, parameters) == 0) {
 
-       /* system("clear");*/
+        system("clear");
         print_labyrinth(labyrinth, parameters.size);
+        printf("Score: %d \n", score);
         move = choose_move();
-        move_player(move, player_cell, labyrinth, labyrinth[parameters.start_labyrinth.length][parameters.start_labyrinth.width]);
+
+        score += move_player(move, player_cell, labyrinth, labyrinth[parameters.start_labyrinth.length][parameters.start_labyrinth.width]);
+        score--;
         player_cell = get_player(labyrinth, parameters.size);
 
     }
 
     system("clear");
     print_labyrinth(labyrinth, parameters.size);
-    printf("It's win \n");
-    
+    printf("It's win. Score: %d\n", score);
+    return score;
 }
 

@@ -11,7 +11,8 @@ OBJ_UTILS = $(SRC_UTILS)/utils.o $(SRC_UTILS)/utils.h
 SRC_PLAYER = ./src/player
 OBJ_PLAYER = $(SRC_PLAYER)/game_mode.o $(SRC_PLAYER)/game_mode.h \
 $(SRC_PLAYER)/user_input.o $(SRC_PLAYER)/user_input.h \
-$(SRC_PLAYER)/player_action.o $(SRC_PLAYER)/player_action.h
+$(SRC_PLAYER)/player_action.o $(SRC_PLAYER)/player_action.h \
+$(SRC_PLAYER)/file_score.o $(SRC_PLAYER)/file_score.h
 
 SRC_LABYRINTH = ./src/labyrinth
 OBJ_LABYRINTH = $(SRC_LABYRINTH)/generator_labyrinth.o \
@@ -46,6 +47,9 @@ user_input.o: $(SRC_PLAYER)/user_input.c $(SRC_PLAYER)/user_input.h $(SRC_LABYRI
 	$(CC) $(CFLAGS) $< -c
 
 player_action.o: $(SRC_PLAYER)/player_action.c $(SRC_PLAYER)/player_action.h $(SRC_LABYRINTH)/struct_labyrinth.h
+	$(CC) $(CFLAGS) $< -c
+
+file_score.o: $(SRC_PLAYER)/file_score.c $(SRC_PLAYER)/file_score.h
 	$(CC) $(CFLAGS) $< -c
 
 game_mode.o: $(SRC_PLAYER)/game_mode.c $(SRC_PLAYER)/game_mode.h $(SRC_LABYRINTH)/struct_labyrinth.h\

@@ -39,7 +39,33 @@ void replace_cell(cell **labyrinth, dimension size, int new_value, int old_value
 			}
 		}
 	}
-		
+}
+
+void generate_special_cell(cell **labyrinth, dimension size) {
+
+	int cell_value;
+	int nb_created_cell = 0;
+	int nb_cell = size.length * size.width / 10;
+	int rand_col;
+	int rand_line;
+	int is_bonus;
+
+	while(nb_created_cell != nb_cell) {
+
+		is_bonus = rand() % 2;
+		rand_line = (rand() % (size.length-2)) +1;
+		rand_col = (rand() % (size.width-2)) +1;
+		cell_value =  rand() % 5 + 1;
+
+		if(labyrinth[rand_line][rand_col].value != 0 && labyrinth[rand_line][rand_col].value != -1
+		&& labyrinth[rand_line+1][rand_col].is_special == 0 && labyrinth[rand_line-1][rand_col].is_special == 0
+		&& labyrinth[rand_line][rand_col+1].is_special == 0 && labyrinth[rand_line][rand_col-1].is_special == 0) {
+			labyrinth[rand_line][rand_col].value = cell_value;
+			is_bonus ? (labyrinth[rand_line][rand_col].is_special = 1) : (labyrinth[rand_line][rand_col].is_special = -1);
+			nb_created_cell++;
+		}
+
+	}
 }
 
 void generate_labyrinth(cell **labyrinth, parameters_labyrinth parameters) {
@@ -75,6 +101,7 @@ void generate_labyrinth(cell **labyrinth, parameters_labyrinth parameters) {
 				labyrinth[i][j].value = 0;
 			}
 			labyrinth[i][j].containsPlayer = 0;
+			labyrinth[i][j].is_special = 0;
 			labyrinth[i][j].coordinates.length = i;
 			labyrinth[i][j].coordinates.width = j;
 
@@ -109,6 +136,8 @@ void generate_labyrinth(cell **labyrinth, parameters_labyrinth parameters) {
 			}
 		}
 	}
+
+	generate_special_cell(labyrinth, size);
 
 	/* create start and end*/
 	labyrinth[parameters.start_labyrinth.length][parameters.start_labyrinth.width].value = 1;

@@ -38,9 +38,15 @@ int main(void) {
 				break;
 				
 			case 3:
-				play(labyrinth, parameters);
+				if(labyrinth != NULL) {
+					play(filename, labyrinth, parameters);
+				} else {
+					printf("Labyrinth empty \n");
+				}
+				
 				printf("\nAppuyer pour revenir au menu\n");
 				scanf("%c", &input);
+
 				if(labyrinth != NULL) {
 					labyrinth = load_labyrinth(filename, &parameters);
 				}

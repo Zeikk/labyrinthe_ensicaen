@@ -5,6 +5,7 @@
 #include "../labyrinth/print_labyrinth.h"
 #include "../labyrinth/struct_labyrinth.h"
 #include "../labyrinth/file_labyrinth.h"
+#include "./file_score.h"
 #include "./user_input.h"
 #include "./player_action.h"
 
@@ -49,9 +50,24 @@ cell** load_labyrinth(char *filename, parameters_labyrinth *parameters) {
 	return labyrinth;
 }
 
-void play(cell **labyrinth, parameters_labyrinth parameters) {
+void play(char *filename, cell **labyrinth, parameters_labyrinth parameters) {
 
-	move(labyrinth, parameters);
+	char *player_name;
+	int score;
+	int length = 0;
+	char input;
+
+	score = move(labyrinth, parameters);
+
+	length = check_best_score(filename, score);
+	printf("Len check: %d \n", length);
+	if(length > -1) {
+		get_score(filename);
+		printf("\nAppuyer pour revenir au menu\n");
+		scanf("%c", &input);
+		player_name = choose_player_name();
+		save_score(filename, player_name, score, length);
+	}
 }
 
 void exit_game() {
