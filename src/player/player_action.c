@@ -86,7 +86,7 @@ void move(cell **labyrinth, parameters_labyrinth parameters) {
     player_cell = get_player(labyrinth, parameters.size);
     while(is_win(*player_cell, parameters) == 0) {
 
-       /* system("clear");*/
+        system("clear");
         print_labyrinth(labyrinth, parameters.size);
         move = choose_move();
         move_player(move, player_cell, labyrinth, labyrinth[parameters.start_labyrinth.length][parameters.start_labyrinth.width]);
@@ -96,7 +96,7 @@ void move(cell **labyrinth, parameters_labyrinth parameters) {
 
     system("clear");
     print_labyrinth(labyrinth, parameters.size);
-    printf("It's win \n");
+    printf("It's a win \n");
     
 }
 
