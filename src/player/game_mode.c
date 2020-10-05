@@ -54,20 +54,17 @@ void play(char *filename, cell **labyrinth, parameters_labyrinth parameters) {
 
 	char *player_name;
 	int score;
-	int length = 0;
-	char input;
+	int pos = 0;
 
 	score = move(labyrinth, parameters);
 
-	length = check_best_score(filename, score);
-	printf("Len check: %d \n", length);
-	if(length > -1) {
-		get_score(filename);
-		printf("\nAppuyer pour revenir au menu\n");
-		scanf("%c", &input);
+	pos = check_best_score(filename, score);
+	if(pos > -1) {
 		player_name = choose_player_name();
-		save_score(filename, player_name, score, length);
+		save_score(filename, player_name, score, pos);
 	}
+
+	get_score(filename);
 }
 
 void exit_game() {

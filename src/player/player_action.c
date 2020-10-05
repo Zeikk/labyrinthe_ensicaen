@@ -30,11 +30,11 @@ int check_is_special(cell* cell_check) {
 
     if(cell_check->is_special == 1) {
         cell_check->is_special = 0;
-        return cell_check->value;
+        return cell_check->value * -1;
 
     } else if(cell_check->is_special == -1) {
         cell_check->is_special = 0;
-        return cell_check->value * -1;
+        return cell_check->value;
     }
 
     return 0;
@@ -105,6 +105,7 @@ int move(cell **labyrinth, parameters_labyrinth parameters) {
     char move;
     cell* player_cell;
     int score = 0;
+    char input;
 
     if(labyrinth == NULL ) {
         perror("Labyrinth empty");
@@ -120,14 +121,18 @@ int move(cell **labyrinth, parameters_labyrinth parameters) {
         move = choose_move();
 
         score += move_player(move, player_cell, labyrinth, labyrinth[parameters.start_labyrinth.length][parameters.start_labyrinth.width]);
-        score--;
+        score++;
         player_cell = get_player(labyrinth, parameters.size);
 
     }
 
     system("clear");
     print_labyrinth(labyrinth, parameters.size);
-    printf("It's win. Score: %d\n", score);
+    printf("It's a win. Score: %d\n", score);
+
+    printf("\nAppuyer pour revenir au menu\n");
+	scanf("%c", &input);
+
     return score;
 }
 
