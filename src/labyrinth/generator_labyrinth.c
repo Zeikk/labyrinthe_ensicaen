@@ -4,6 +4,8 @@
 #include "./generator_labyrinth.h"
 #include "./struct_labyrinth.h"
 
+#define VALUE_SPECIAL_CELL 1
+
 int verif_labyrinth(cell **labyrinth, dimension size) {
 	
 	/* first case */
@@ -43,7 +45,6 @@ void replace_cell(cell **labyrinth, dimension size, int new_value, int old_value
 
 void generate_special_cell(cell **labyrinth, dimension size) {
 
-	int cell_value;
 	int nb_created_cell = 0;
 	int nb_cell = size.length * size.width / 10;
 	int rand_col;
@@ -55,12 +56,11 @@ void generate_special_cell(cell **labyrinth, dimension size) {
 		is_bonus = rand() % 2;
 		rand_line = (rand() % (size.length-2)) +1;
 		rand_col = (rand() % (size.width-2)) +1;
-		cell_value =  rand() % 5 + 1;
 
 		if(labyrinth[rand_line][rand_col].value != 0 && labyrinth[rand_line][rand_col].value != -1
 		&& labyrinth[rand_line+1][rand_col].is_special == 0 && labyrinth[rand_line-1][rand_col].is_special == 0
 		&& labyrinth[rand_line][rand_col+1].is_special == 0 && labyrinth[rand_line][rand_col-1].is_special == 0) {
-			labyrinth[rand_line][rand_col].value = cell_value;
+			labyrinth[rand_line][rand_col].value = VALUE_SPECIAL_CELL;
 			is_bonus ? (labyrinth[rand_line][rand_col].is_special = 1) : (labyrinth[rand_line][rand_col].is_special = -1);
 			nb_created_cell++;
 		}

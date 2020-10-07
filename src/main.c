@@ -4,6 +4,7 @@
 #include "./player/game_mode.h"
 #include "./player/user_input.h"
 #include "./labyrinth/struct_labyrinth.h"
+#include "./utils/utils.h"
 
 
 int main(void) {
@@ -13,7 +14,6 @@ int main(void) {
 	cell **labyrinth = NULL;
 	parameters_labyrinth parameters;
 	char *filename = NULL;
-	char input;
 
 	while(!win) {
 		choice = display_menu(filename);
@@ -23,7 +23,8 @@ int main(void) {
 				filename = choose_labyrinth_name(0);
 				labyrinth = create_labyrinth(&parameters, filename);
 				printf("\nAppuyer pour revenir au menu\n");
-				scanf("%c", &input);
+				clean_buffer();
+
 				break;
 
 			case 2:
@@ -34,7 +35,8 @@ int main(void) {
 				}
 				
 				printf("\nAppuyer pour revenir au menu\n");
-				scanf("%c", &input);
+				clean_buffer();
+
 				break;
 				
 			case 3:
@@ -45,7 +47,7 @@ int main(void) {
 				}
 				
 				printf("\nAppuyer pour revenir au menu\n");
-				scanf("%c", &input);
+				clean_buffer();
 
 				if(labyrinth != NULL) {
 					labyrinth = load_labyrinth(filename, &parameters);

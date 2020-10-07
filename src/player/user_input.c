@@ -17,13 +17,13 @@ dimension choose_dimension() {
         printf("Saisir une longeur impaire: \n");
         scanf("%d", &size.length);
         clean_buffer();
-    }while(size.length < 5 || size.length > 99 || size.length % 2 == 0);
+    }while(size.length < 5 || size.length > 45 || size.length % 2 == 0);
 
     do{
         printf("Saisir une largeur impaire: \n");
         scanf("%d", &size.width);
         clean_buffer();
-    }while(size.width < 5 || size.width > 99 || size.width % 2 == 0);
+    }while(size.width < 5 || size.width > 45 || size.width % 2 == 0);
 
     return size;
 }
@@ -34,6 +34,10 @@ void display_save_directory() {
     
     DIR *save_directory = opendir("./saves"); 
     char *extension;
+    char *filename;
+    int i;
+    int length_extension;
+    int length_filename;
 
     if (save_directory) {
         printf("Liste des labyrinthes: \n");
@@ -42,7 +46,15 @@ void display_save_directory() {
 
             extension = strrchr(dir->d_name, '.');
             if(strcmp(dir->d_name, "." ) != 0 && strcmp(dir->d_name, "..") != 0 && strcmp(extension, ".score") != 0) {
-                printf("- %s\n", dir->d_name);
+                
+                /* delete extension */
+                filename = dir->d_name;
+                length_filename = strlen(filename);
+                length_extension = strlen(extension);
+                for(i = 0; i<= length_extension; i++) {
+                    filename[length_filename - i] = 0;
+                }
+                printf("- %s\n", filename);
             }
         }
         closedir(save_directory);

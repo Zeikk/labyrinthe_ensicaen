@@ -2,6 +2,7 @@
 #include "./user_input.h"
 #include "../labyrinth/struct_labyrinth.h"
 #include "../labyrinth/print_labyrinth.h"
+#include "../utils/utils.h"
 #include <stdlib.h>
 #include <stdio.h>
 
@@ -105,7 +106,6 @@ int move(cell **labyrinth, parameters_labyrinth parameters) {
     char move;
     cell* player_cell;
     int score = 0;
-    char input;
 
     if(labyrinth == NULL ) {
         perror("Labyrinth empty");
@@ -128,10 +128,10 @@ int move(cell **labyrinth, parameters_labyrinth parameters) {
 
     system("clear");
     print_labyrinth(labyrinth, parameters.size);
-    printf("It's a win. Score: %d\n", score);
+    printf("C'est gagné. Score: %d\n", score);
 
     printf("\nAppuyer pour revenir au menu\n");
-	scanf("%c", &input);
+    clean_buffer();
 
     return score;
 }

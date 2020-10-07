@@ -14,9 +14,10 @@ void format_labyrinth(cell **labyrinth, dimension size) {
 				labyrinth[i][j].symbol = '#';
 			} else if(labyrinth[i][j].containsPlayer) {
 				labyrinth[i][j].symbol = 'o';
-			} else if (labyrinth[i][j].is_special == 1 || labyrinth[i][j].is_special == -1){
-				sprintf(&labyrinth[i][j].symbol, "%d", labyrinth[i][j].value);
-				
+			} else if (labyrinth[i][j].is_special == 1){
+				labyrinth[i][j].symbol = 'X';
+			} else if (labyrinth[i][j].is_special == -1){
+				labyrinth[i][j].symbol = 'Y';
 			} else {
 				labyrinth[i][j].symbol = ' ';
 			}
@@ -32,12 +33,7 @@ void print_labyrinth(cell **labyrinth, dimension size) {
 	format_labyrinth(labyrinth, size);
 	for(i = 0; i<size.length; i++) {
 		for(j = 0; j<size.width; j++) {
-			
-			if(labyrinth[i][j].is_special == 1) {
-				printf("-%c", labyrinth[i][j].symbol);
-			} else {
-				printf("%c ", labyrinth[i][j].symbol);
-			}
+			printf("%c ", labyrinth[i][j].symbol);
 		}
 		printf("\n");
 	}

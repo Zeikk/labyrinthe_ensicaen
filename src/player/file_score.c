@@ -153,7 +153,7 @@ void get_score(char *filename) {
 
     fseek(file, 0, SEEK_SET);
 
-    printf("Listes des scores: \n");
+    printf("Listes des scores: \n\n");
 
     for(i = 0; i<length; i++) {
         if(fread(&file_score, sizeof(struct_score), 1, file) != 1) {
@@ -162,7 +162,7 @@ void get_score(char *filename) {
             return;
         }
 
-        printf("%d - Score: %d Player: %s\n", i+1, file_score.score, file_score.player_name);
+        printf("%d - Player: %s Score: %d\n", i+1, file_score.player_name, file_score.score);
 
     }
     fclose(file);

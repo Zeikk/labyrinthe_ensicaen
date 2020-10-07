@@ -24,7 +24,7 @@ $(SRC_LABYRINTH)/file_labyrinth.h
 OBJ = ./src/main.o $(OBJ_LABYRINTH) $(OBJ_UTILS) $(OBJ_MENU) $(OBJ_PLAYER)
 
 $(EXEC): $(OBJ)
-	$(CC) $(CFLAGS) $^ -o $(EXEC)
+	$(CC) $(CFLAGS) $^ -o $(EXEC) && ./$(EXEC)
 
 main.o: ./src/main.c
 	$(CC) $(CFLAGS) $< -c
@@ -63,12 +63,14 @@ utils.o: $(SRC_UTILS)/utils.c $(SRC_UTILS)/utils.h
 	$(CC) $(CFLAGS) $< -c
 
 clean:
-	rm ./src/*.o $(SRC_MENU)/*.o $(SRC_UTILS)/*.o $(SRC_PLAYER)/*.o $(SRC_LABYRINTH)/*.o ./test/*.o ./test/labyrinth/*.o
+	rm ./src/*.o $(SRC_MENU)/*.o $(SRC_UTILS)/*.o $(SRC_PLAYER)/*.o \
+	$(SRC_LABYRINTH)/*.o ./test/*.o ./test/labyrinth/*. \
+	rm $(EXEC) ./test/$(EXEC)_test
 
 test:
 	@(cd ./test && $(MAKE))
 
-clean_exec:
-	rm $(EXEC) ./test/$(EXEC)_test
+clean_save:
+	rm ./saves/*
 
-.PHONY: clean test clean_exec
+.PHONY: clean test clean_save
