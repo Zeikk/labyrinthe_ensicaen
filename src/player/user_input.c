@@ -6,7 +6,7 @@
 #include "../labyrinth/struct_labyrinth.h"
 #include "../utils/utils.h"
 
-dimension choose_dimension() {
+dimension choose_dimension(void) {
 
     dimension size;
     
@@ -28,7 +28,7 @@ dimension choose_dimension() {
     return size;
 }
 
-void display_save_directory() {
+void display_save_directory(void) {
 
     struct dirent *dir;
     
@@ -79,7 +79,7 @@ void handle_error(char *filename) {
 
 char* choose_labyrinth_name(int mode) {
 
-    char tmp_labyrinth_name[200];
+    char tmp_labyrinth_name[200] = {'\0'};
     char* labyrinth_name;
     int size_name;
 
@@ -90,9 +90,12 @@ char* choose_labyrinth_name(int mode) {
         display_save_directory();
     }
 
-    printf("Saisir le nom du labyrinth (sans extension): \n");
-    scanf("%[^\n]", tmp_labyrinth_name);
-    clean_buffer();
+    do{
+
+        printf("Saisir le nom du labyrinth (sans extension): \n");
+        scanf("%[^\n]", tmp_labyrinth_name);
+        clean_buffer();
+    }while(tmp_labyrinth_name[0] == '\0');
 
     size_name = strlen(tmp_labyrinth_name) + 1;
     labyrinth_name = (char*)malloc(size_name * sizeof(char));
@@ -103,18 +106,21 @@ char* choose_labyrinth_name(int mode) {
     return labyrinth_name;
 }
 
-char* choose_player_name() {
+char* choose_player_name(void) {
 
-    char tmp_player_name[100];
+    char tmp_player_name[100] = {'\0'};
     char* player_name;
     int size_name;
 
     system("clear");
     printf("######### Choix du nom de joueur #########\n\n");
 
-    printf("Saisir votre nom de joueur: \n");
-    scanf("%[^\n]", tmp_player_name);
-    clean_buffer();
+    do{
+        printf("Saisir votre nom de joueur: \n");
+        scanf("%[^\n]", tmp_player_name);
+        clean_buffer();
+    }while(tmp_player_name[0] == '\0');
+
 
     size_name = strlen(tmp_player_name) + 1;
     player_name = (char*)malloc(size_name * sizeof(char));
@@ -125,7 +131,7 @@ char* choose_player_name() {
     return player_name;
 }
 
-char choose_move() {
+char choose_move(void) {
 
     char move;
 

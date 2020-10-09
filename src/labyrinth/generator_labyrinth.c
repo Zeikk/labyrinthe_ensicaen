@@ -6,6 +6,11 @@
 
 #define VALUE_SPECIAL_CELL 1
 
+/** verif_labyrinth tests if labyrinth is only filled with 0 / -1 or first case's number
+* @param labyrinth array containing all the cells of the labyrinth
+* @param size labyrinth's dimension
+* @return 1 if the labyritnh is fill else 0
+*/
 int verif_labyrinth(cell **labyrinth, dimension size) {
 	
 	/* first case */
@@ -13,7 +18,6 @@ int verif_labyrinth(cell **labyrinth, dimension size) {
 	int i;
 	int j;
 
-	/* test if labyrinth is only filled with 0 / -1 or first case's number */
 	for(i = 0; i<size.length; i++) {
 
 		for(j = 0; j<size.width; j++) {
@@ -30,6 +34,13 @@ int verif_labyrinth(cell **labyrinth, dimension size) {
 /* replace cell labyrinth[x][y] by value
  * and search if other case can by replace
  */
+
+/** replace_cell replaces cell labyrinth[x][y] by value and search if other case can by replace
+* @param labyrinth array containing all the cells of the labyrinth
+* @param size labyrinth's dimension
+* @param new_value value that will replace old value
+* @param old_value value that will be replaced
+*/
 void replace_cell(cell **labyrinth, dimension size, int new_value, int old_value) {
 	
 	int i;
@@ -43,6 +54,10 @@ void replace_cell(cell **labyrinth, dimension size, int new_value, int old_value
 	}
 }
 
+/** generate_special_cell creates randomly bonus or traps
+* @param labyrinth array containing all the cells of the labyrinth
+* @param size labyrinth's dimension
+*/
 void generate_special_cell(cell **labyrinth, dimension size) {
 
 	int nb_created_cell = 0;
@@ -68,6 +83,10 @@ void generate_special_cell(cell **labyrinth, dimension size) {
 	}
 }
 
+/** generate_labyrinth creates a perfect labyrinth using Randomized Kruskal's algorithm
+* @param labyrinth array containing all the cells of the labyrinth
+* @param parameters_labyrinth labyrinth's parameters
+*/
 void generate_labyrinth(cell **labyrinth, parameters_labyrinth parameters) {
 	
 	int i;

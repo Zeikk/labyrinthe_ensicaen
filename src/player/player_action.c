@@ -6,6 +6,8 @@
 #include <stdlib.h>
 #include <stdio.h>
 
+#define VALUE_SPECIAL_CELL 1
+
 cell* get_player(cell **labyrinth, dimension size) {
 
     int i;
@@ -117,6 +119,7 @@ int move(cell **labyrinth, parameters_labyrinth parameters) {
 
         system("clear");
         print_labyrinth(labyrinth, parameters.size);
+        printf("X: %d Y: %d \n", VALUE_SPECIAL_CELL*-1, VALUE_SPECIAL_CELL);
         printf("Score: %d \n", score);
         move = choose_move();
 
