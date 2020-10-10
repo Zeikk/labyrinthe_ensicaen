@@ -1,8 +1,33 @@
+/**
+* ENSICAEN
+* 6 Boulevard Maréchal Juin
+* F-14050 Caen Cedex
+*
+* This file is owned by ENSICAEN students. No portion of this
+* document may be reproduced, copied or revised without written
+* permission of the authors.
+*/
+
+/**
+* @author Loïck LEPRÉVOST <loick.leprevost@ecole.ensicaen.fr>
+* @version 1.0.2 2020-10-10
+*/
+
+/**
+* @file file_score.c
+* @brief save and load score in a file
+*/
+
 #include "file_score.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 
+/** init_file_score opens a file
+* @param filename a pointer describing a filename
+* @param read_file boolean, 1 if file is opened in reading else it's opened in writing
+* @return a pointer on the opened file or NULL
+*/
 FILE *init_file_score(char *filename, int read_file) {
 
     FILE *file;
@@ -43,6 +68,12 @@ FILE *init_file_score(char *filename, int read_file) {
     return file;
 }
 
+/** save_score saves a player's score in file named <filename>.score
+* @param filename a pointer describing a filename
+* @param player_name a pointer describing a player name
+* @param score player' score
+* @param position position where the score will be inserted
+*/
 void save_score(char *filename, char *player_name, int score, int position) {
 
     FILE *file;
@@ -83,7 +114,7 @@ void save_score(char *filename, char *player_name, int score, int position) {
         return;
     }
 
-    /* write old scores */
+    /* write old scores except the last */
     for(i = 0; i<length-position && position+i+1<10; i++) {
 
         if(fwrite(&all_files[i], sizeof(struct_score), 1, file) != 1) {
@@ -97,6 +128,11 @@ void save_score(char *filename, char *player_name, int score, int position) {
     fclose(file);
 }
 
+/** check_best_score tests if the score can be inserted
+* @param filename a pointer describing a filename
+* @param score player's score
+* @return index where the score can be inserted or -1 if the score can't be inserted
+*/
 int check_best_score(char *filename, int score) {
 
     FILE *file;
@@ -136,6 +172,9 @@ int check_best_score(char *filename, int score) {
     fclose(file);
 }
 
+/** get_score displays all the scores in <filename>.score
+* @param filename a pointer describing a filename
+*/
 void get_score(char *filename) {
 
     FILE *file;

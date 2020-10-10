@@ -1,4 +1,4 @@
-#include "./player_action.h"
+#include "./move_player.h"
 #include "./user_input.h"
 #include "../labyrinth/struct_labyrinth.h"
 #include "../labyrinth/print_labyrinth.h"

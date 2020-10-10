@@ -1,3 +1,23 @@
+/**
+* ENSICAEN
+* 6 Boulevard Maréchal Juin
+* F-14050 Caen Cedex
+*
+* This file is owned by ENSICAEN students. No portion of this
+* document may be reproduced, copied or revised without written
+* permission of the authors.
+*/
+
+/**
+* @author Loïck LEPRÉVOST <loick.leprevost@ecole.ensicaen.fr>
+* @version 1.0.1 - 2020-10-01
+*/
+
+/**
+* @file generator_labyrinth.c
+* @brief generate a perfect labyrinth with bonus / traps
+*/
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
@@ -18,11 +38,11 @@ int verif_labyrinth(cell **labyrinth, dimension size) {
 	int i;
 	int j;
 
-	for(i = 0; i<size.length; i++) {
+	for (i = 0; i<size.length; i++) {
 
-		for(j = 0; j<size.width; j++) {
+		for (j = 0; j<size.width; j++) {
 			
-			if(labyrinth[i][j].value != first_number && labyrinth[i][j].value != -1 && labyrinth[i][j].value != 0) {
+			if (labyrinth[i][j].value != first_number && labyrinth[i][j].value != -1 && labyrinth[i][j].value != 0) {
 				return 0;
 			}
 		}
@@ -45,9 +65,9 @@ void replace_cell(cell **labyrinth, dimension size, int new_value, int old_value
 	
 	int i;
 	int j;
-	for(i = 0; i<size.length; i++) {
-		for(j = 0; j<size.width; j++) {
-			if(labyrinth[i][j].value == old_value) {
+	for (i = 0; i<size.length; i++) {
+		for (j = 0; j<size.width; j++) {
+			if (labyrinth[i][j].value == old_value) {
 				labyrinth[i][j].value = new_value;
 			}
 		}
@@ -66,13 +86,13 @@ void generate_special_cell(cell **labyrinth, dimension size) {
 	int rand_line;
 	int is_bonus;
 
-	while(nb_created_cell != nb_cell) {
+	while (nb_created_cell != nb_cell) {
 
 		is_bonus = rand() % 2;
 		rand_line = (rand() % (size.length-2)) +1;
 		rand_col = (rand() % (size.width-2)) +1;
 
-		if(labyrinth[rand_line][rand_col].value != 0 && labyrinth[rand_line][rand_col].value != -1
+		if (labyrinth[rand_line][rand_col].value != 0 && labyrinth[rand_line][rand_col].value != -1
 		&& labyrinth[rand_line+1][rand_col].is_special == 0 && labyrinth[rand_line-1][rand_col].is_special == 0
 		&& labyrinth[rand_line][rand_col+1].is_special == 0 && labyrinth[rand_line][rand_col-1].is_special == 0) {
 			labyrinth[rand_line][rand_col].value = VALUE_SPECIAL_CELL;
@@ -104,13 +124,13 @@ void generate_labyrinth(cell **labyrinth, parameters_labyrinth parameters) {
 	 * opening = first way
 	 */
 
-	for(i = 0; i<size.length; i++) {
+	for (i = 0; i<size.length; i++) {
 
-		for(j = 0; j<size.width; j++) {
-			if(j == 0 || i == 0 || i == size.length-1 || j == size.width-1) {
+		for (j = 0; j<size.width; j++) {
+			if (j == 0 || i == 0 || i == size.length-1 || j == size.width-1) {
 				labyrinth[i][j].value = -1;
 
-			} else if(i % 2 != 0 && j % 2 != 0) {
+			} else if (i % 2 != 0 && j % 2 != 0) {
 				
 				labyrinth[i][j].value = opening;
 				opening++;
@@ -129,12 +149,12 @@ void generate_labyrinth(cell **labyrinth, parameters_labyrinth parameters) {
 	
 	/* create random way */
 	
-	while(!verif_labyrinth(labyrinth, size)) {
+	while (!verif_labyrinth(labyrinth, size)) {
 		
 		rand_line = (rand() % (size.length-2)) +1;
 		rand_col = (rand() % (size.width-2)) +1;
 
-		if(labyrinth[rand_line][rand_col].value == 0) {
+		if (labyrinth[rand_line][rand_col].value == 0) {
 			
 			/* all cells around the random wall */
 			int *top_cell = &labyrinth[rand_line-1][rand_col].value;
@@ -143,13 +163,13 @@ void generate_labyrinth(cell **labyrinth, parameters_labyrinth parameters) {
 			int *right_cell = &labyrinth[rand_line][rand_col+1].value;
 
 			/* if it's possible to create a vertical way */
-			if(*top_cell != *bot_cell && *top_cell > 0 && *bot_cell > 0) {
+			if (*top_cell != *bot_cell && *top_cell > 0 && *bot_cell > 0) {
 				labyrinth[rand_line][rand_col].value = *top_cell;
 				replace_cell(labyrinth, size, *top_cell, *bot_cell);
 			}
 			
 			/* if it's possible to create an horizontal way */
-			if(*left_cell != *right_cell && *left_cell > 0 && *right_cell > 0) {
+			if (*left_cell != *right_cell && *left_cell > 0 && *right_cell > 0) {
 				labyrinth[rand_line][rand_col].value = *left_cell;
 				replace_cell(labyrinth, size, *left_cell, *right_cell);
 			}

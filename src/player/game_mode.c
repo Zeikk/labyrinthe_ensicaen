@@ -1,3 +1,23 @@
+/**
+* ENSICAEN
+* 6 Boulevard Maréchal Juin
+* F-14050 Caen Cedex
+*
+* This file is owned by ENSICAEN students. No portion of this
+* document may be reproduced, copied or revised without written
+* permission of the authors.
+*/
+
+/**
+* @author Loïck LEPRÉVOST
+* @version 2.0.0 2020-10-10
+*/
+
+/**
+* @file game_mode.c
+* @brief 
+*/
+
 #include <stdlib.h>
 #include <stdio.h>
 #include "./game_mode.h"
@@ -7,7 +27,7 @@
 #include "../labyrinth/file_labyrinth.h"
 #include "./file_score.h"
 #include "./user_input.h"
-#include "./player_action.h"
+#include "./move_player.h"
 
 
 cell** create_labyrinth(parameters_labyrinth *parameters, char* filename) {
