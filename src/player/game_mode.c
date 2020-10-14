@@ -9,13 +9,13 @@
 */
 
 /**
-* @author Loïck LEPRÉVOST
+* @author Loïck LEPRÉVOST <loick.leprevost@ecole.ensicaen.fr>
 * @version 2.0.0 2020-10-10
 */
 
 /**
 * @file game_mode.c
-* @brief 
+* @brief function to launch game modes
 */
 
 #include <stdlib.h>
@@ -28,7 +28,6 @@
 #include "./file_score.h"
 #include "./user_input.h"
 #include "./move_player.h"
-
 
 cell** create_labyrinth(parameters_labyrinth *parameters, char* filename) {
 
@@ -43,8 +42,8 @@ cell** create_labyrinth(parameters_labyrinth *parameters, char* filename) {
 	parameters->end_labyrinth.length = parameters->size.length-2;
 	parameters->end_labyrinth.width = parameters->size.width-1;
 
-	if(labyrinth == NULL) {
-        perror("Error labyrinth's creation");
+	if (labyrinth == NULL) {
+        perror("Error during labyrinth's creation");
 		return NULL;
 	}
 
@@ -61,8 +60,8 @@ cell** load_labyrinth(char *filename, parameters_labyrinth *parameters) {
 
 	*parameters = load_parameters(filename);
 	labyrinth = load_array(filename, *parameters);
-	if(labyrinth == NULL) {
-		printf("Le labyrinthe n'existe pas \n");
+	if (labyrinth == NULL) {
+		printf("Labyrinth doesn't exist \n");
 		return NULL;
 	}
 
@@ -79,7 +78,7 @@ void play(char *filename, cell **labyrinth, parameters_labyrinth parameters) {
 	score = move(labyrinth, parameters);
 
 	pos = check_best_score(filename, score);
-	if(pos > -1) {
+	if (pos > -1) {
 		player_name = choose_player_name();
 		save_score(filename, player_name, score, pos);
 	}
@@ -87,7 +86,7 @@ void play(char *filename, cell **labyrinth, parameters_labyrinth parameters) {
 	get_score(filename);
 }
 
-void exit_game() {
+void exit_game(void) {
 
 	exit(0);
 }

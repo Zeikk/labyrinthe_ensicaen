@@ -22,10 +22,6 @@
 #include <stdlib.h>
 #include "./struct_labyrinth.h"
 
-/** get_labyrinth initialize labyrinth
-* @param size labyrinth's dimension
-* @return labyrinth intialized or NULL
-*/
 cell** get_labyrinth(dimension size) {
 
     int i;

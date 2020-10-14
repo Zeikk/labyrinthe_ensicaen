@@ -1,4 +1,4 @@
-/*
+/**
 * ENSICAEN
 * 6 Boulevard Maréchal Juin
 * F-14050 Caen Cedex
@@ -6,6 +6,16 @@
 * This file is owned by ENSICAEN students. No portion of this
 * document may be reproduced, copied or revised without written
 * permission of the authors.
+*/
+
+/**
+* @author Loïck LEPRÉVOST <loick.leprevost@ecole.ensicaen.fr>
+* @version 3.0.1 2020-10-10
+*/
+
+/**
+* @file main.c
+* @brief launch the program
 */
 
 #include <stdlib.h>
@@ -25,14 +35,14 @@ int main(void) {
 	parameters_labyrinth parameters;
 	char *filename = NULL;
 
-	while(!win) {
+	while (!win) {
 		choice = display_menu(filename);
-		switch(choice) {
+		switch (choice) {
 			
 			case 1:
 				filename = choose_labyrinth_name(0);
 				labyrinth = create_labyrinth(&parameters, filename);
-				printf("\nAppuyer pour revenir au menu\n");
+				printf("\nPress to back to menu\n");
 				clean_buffer();
 
 				break;
@@ -40,26 +50,26 @@ int main(void) {
 			case 2:
 				filename = choose_labyrinth_name(1);
 				labyrinth = load_labyrinth(filename, &parameters);
-				if(labyrinth == NULL) {
+				if (labyrinth == NULL) {
 					filename = NULL;
 				}
 				
-				printf("\nAppuyer pour revenir au menu\n");
+				printf("\nPress to back to menu\n");
 				clean_buffer();
 
 				break;
 				
 			case 3:
-				if(labyrinth != NULL) {
+				if (labyrinth != NULL) {
 					play(filename, labyrinth, parameters);
 				} else {
 					printf("Labyrinth empty \n");
 				}
 				
-				printf("\nAppuyer pour revenir au menu\n");
+				printf("\nPress to back to menu\n");
 				clean_buffer();
 
-				if(labyrinth != NULL) {
+				if (labyrinth != NULL) {
 					labyrinth = load_labyrinth(filename, &parameters);
 				}
 				break;

@@ -1,3 +1,23 @@
+/**
+* ENSICAEN
+* 6 Boulevard Maréchal Juin
+* F-14050 Caen Cedex
+*
+* This file is owned by ENSICAEN students. No portion of this
+* document may be reproduced, copied or revised without written
+* permission of the authors.
+*/
+
+/**
+* @author Loïcl LEPRÉVOST <loick.leprevost@ecole.ensicaen.fr>
+* @version 2.0.1 2020-10-09
+*/
+
+/**
+* @file user_input.c
+* @brief display message and scan user's response
+*/
+
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
@@ -11,19 +31,19 @@ dimension choose_dimension(void) {
     dimension size;
     
     system("clear");
-    printf("######### Choix des dimensions #########\n\n");
+    printf("######### Choice of dimension #########\n\n");
 
-    do{
-        printf("Saisir une longeur impaire: \n");
+    do {
+        printf("Enter an odd length (5-45): \n");
         scanf("%d", &size.length);
         clean_buffer();
-    }while(size.length < 5 || size.length > 45 || size.length % 2 == 0);
+    } while(size.length < 5 || size.length > 45 || size.length % 2 == 0);
 
-    do{
-        printf("Saisir une largeur impaire: \n");
+    do {
+        printf("Enter an odd width (5-45): \n");
         scanf("%d", &size.width);
         clean_buffer();
-    }while(size.width < 5 || size.width > 45 || size.width % 2 == 0);
+    } while(size.width < 5 || size.width > 45 || size.width % 2 == 0);
 
     return size;
 }
@@ -40,18 +60,18 @@ void display_save_directory(void) {
     int length_filename;
 
     if (save_directory) {
-        printf("Liste des labyrinthes: \n");
+        printf("Labyrinths list: \n");
 
         while ((dir = readdir(save_directory)) != NULL) {
 
             extension = strrchr(dir->d_name, '.');
-            if(strcmp(dir->d_name, "." ) != 0 && strcmp(dir->d_name, "..") != 0 && strcmp(extension, ".score") != 0) {
+            if (strcmp(dir->d_name, "." ) != 0 && strcmp(dir->d_name, "..") != 0 && strcmp(extension, ".score") != 0) {
                 
                 /* delete extension */
                 filename = dir->d_name;
                 length_filename = strlen(filename);
                 length_extension = strlen(extension);
-                for(i = 0; i<= length_extension; i++) {
+                for (i = 0; i<= length_extension; i++) {
                     filename[length_filename - i] = 0;
                 }
                 printf("- %s\n", filename);
@@ -62,16 +82,16 @@ void display_save_directory(void) {
     printf("\n");
 }
 
-void handle_error(char *filename) {
+void handle_error(char *name) {
 
     int i;
     int j;
     char wrong_chars[] = {'.', '/'};
 
-    for(i = 0; i<(int)strlen(filename); i++) {
-        for(j = 0; j<(int)strlen(wrong_chars); j++) {
-            if(filename[i] == wrong_chars[j]) {
-                filename[i] = '_';
+    for (i = 0; i<(int)strlen(name); i++) {
+        for (j = 0; j<(int)strlen(wrong_chars); j++) {
+            if (name[i] == wrong_chars[j]) {
+                name[i] = '_';
             }
         }
     }
@@ -84,18 +104,18 @@ char* choose_labyrinth_name(int mode) {
     int size_name;
 
     system("clear");
-    printf("######### Choix du nom du labyrinthe #########\n\n");
+    printf("######### Choice of labyrinth's name #########\n\n");
 
-    if(mode) {
+    if (mode) {
         display_save_directory();
     }
 
-    do{
+    do {
 
-        printf("Saisir le nom du labyrinth (sans extension): \n");
+        printf("Enter a labyrinth's name (without extension): \n");
         scanf("%[^\n]", tmp_labyrinth_name);
         clean_buffer();
-    }while(tmp_labyrinth_name[0] == '\0');
+    } while(tmp_labyrinth_name[0] == '\0');
 
     size_name = strlen(tmp_labyrinth_name) + 1;
     labyrinth_name = (char*)malloc(size_name * sizeof(char));
@@ -113,13 +133,13 @@ char* choose_player_name(void) {
     int size_name;
 
     system("clear");
-    printf("######### Choix du nom de joueur #########\n\n");
+    printf("######### Choice of player's name #########\n\n");
 
-    do{
-        printf("Saisir votre nom de joueur: \n");
+    do {
+        printf("Enter your player's name: \n");
         scanf("%[^\n]", tmp_player_name);
         clean_buffer();
-    }while(tmp_player_name[0] == '\0');
+    } while(tmp_player_name[0] == '\0');
 
 
     size_name = strlen(tmp_player_name) + 1;
@@ -135,13 +155,13 @@ char choose_move(void) {
 
     char move;
 
-    printf("\n######### Choix du mouvement #########\n\n");
+    printf("\n######### Choice of movement #########\n\n");
 
-    do{
-        printf("Saisir le déplacement (z/q/s/d): \n");
+    do {
+        printf("Enter a movement (z/q/s/d): \n");
         scanf("%c", &move);
         clean_buffer();
-    }while(move != 'z' && move != 'q' && move != 's' && move != 'd');
+    } while(move != 'z' && move != 'q' && move != 's' && move != 'd');
     
     return move;
 }

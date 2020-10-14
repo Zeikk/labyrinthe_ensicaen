@@ -34,7 +34,7 @@ FILE *init_file_score(char *filename, int read_file) {
     char directory[] = {"./saves/"};
     char extension[] = {".score"};
     char* save_directory = (char*)malloc(strlen(filename) + 1 + strlen(directory) + 1 + strlen(extension) + 1) ;
-    if(save_directory == NULL) {
+    if (save_directory == NULL) {
         perror("Error allocation");
         return NULL;
 
@@ -43,20 +43,20 @@ FILE *init_file_score(char *filename, int read_file) {
     strcat(save_directory, filename);
     strcat(save_directory, extension);
 
-    if(read_file) {
+    if (read_file) {
 
         file = fopen(save_directory, "rb");
-        if(file == NULL) {
+        if (file == NULL) {
             free(save_directory);
             return NULL;
         }
     } else {
 
         file = fopen(save_directory, "r+b");
-        if(file == NULL) {
+        if (file == NULL) {
 
             file = fopen(save_directory, "ab");
-            if(file == NULL) {
+            if (file == NULL) {
                 free(save_directory);
                 return NULL;
             }
@@ -86,7 +86,7 @@ void save_score(char *filename, char *player_name, int score, int position) {
     file_score.score = score;
 
     file = init_file_score(filename, 0);
-    if(file == NULL) {
+    if (file == NULL) {
         return;
     }
 
@@ -98,9 +98,9 @@ void save_score(char *filename, char *player_name, int score, int position) {
     /* read old scores */
     fseek(file, sizeof(struct_score) * position, SEEK_SET);
 
-    for(i = 0; i<length-position; i++) {
+    for (i = 0; i<length-position; i++) {
 
-         if(fread(&all_files[i], sizeof(struct_score), 1, file) != 1) {
+         if (fread(&all_files[i], sizeof(struct_score), 1, file) != 1) {
             perror("Cannot read struct_score in file");
             fclose(file);
             return;
@@ -108,23 +108,23 @@ void save_score(char *filename, char *player_name, int score, int position) {
     }
     
     fseek(file, sizeof(struct_score) * position, SEEK_SET);
-    if(fwrite(&file_score, sizeof(struct_score), 1, file) != 1) {
+    if (fwrite(&file_score, sizeof(struct_score), 1, file) != 1) {
         perror("Cannot write struct_score in file");
         fclose(file);
         return;
     }
 
     /* write old scores except the last */
-    for(i = 0; i<length-position && position+i+1<10; i++) {
+    for (i = 0; i<length-position && position+i+1<10; i++) {
 
-        if(fwrite(&all_files[i], sizeof(struct_score), 1, file) != 1) {
+        if (fwrite(&all_files[i], sizeof(struct_score), 1, file) != 1) {
             perror("Cannot write struct_score in file");
             fclose(file);
             return;
         }
     }
 
-    printf("Score sauvegardé \n\n");
+    printf("Score saved \n\n");
     fclose(file);
 }
 
@@ -141,7 +141,7 @@ int check_best_score(char *filename, int score) {
     int i;
 
     file = init_file_score(filename, 1);
-    if(file == NULL) {
+    if (file == NULL) {
         return 0;
     }
 
@@ -150,20 +150,20 @@ int check_best_score(char *filename, int score) {
 
     fseek(file, 0, SEEK_SET);
 
-    for(i = 0; i<length; i++) {
-        if(fread(&file_score, sizeof(struct_score), 1, file) != 1) {
+    for (i = 0; i<length; i++) {
+        if (fread(&file_score, sizeof(struct_score), 1, file) != 1) {
             perror("Cannot read struct_score in file");
             fclose(file);
             return -1;
         }
 
-        if(file_score.score > score) {
+        if (file_score.score > score) {
             fclose(file);
             return i;
         }
     }
     
-    if(length < 10) {
+    if (length < 10) {
         fclose(file);
         return length;
     }
@@ -183,7 +183,7 @@ void get_score(char *filename) {
     int i;
 
     file = init_file_score(filename, 1);
-    if(file == NULL) {
+    if (file == NULL) {
         return;
     }
 
@@ -192,10 +192,10 @@ void get_score(char *filename) {
 
     fseek(file, 0, SEEK_SET);
 
-    printf("Listes des scores: \n\n");
+    printf("Scores list: \n\n");
 
-    for(i = 0; i<length; i++) {
-        if(fread(&file_score, sizeof(struct_score), 1, file) != 1) {
+    for (i = 0; i<length; i++) {
+        if (fread(&file_score, sizeof(struct_score), 1, file) != 1) {
             perror("Cannot read struct_score in file");
             fclose(file);
             return;

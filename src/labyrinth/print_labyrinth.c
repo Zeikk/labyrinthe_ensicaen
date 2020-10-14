@@ -23,10 +23,7 @@
 #include "./print_labyrinth.h"
 #include "./struct_labyrinth.h"
 
-/** format_labyrinth assigns a symbol to each cell
-* @param labyrinth array containing all the cells of the labyrinth
-* @param size labyrinth's dimension
-*/
+
 void format_labyrinth(cell **labyrinth, dimension size) {
 	int i;
 	int j;
@@ -49,10 +46,6 @@ void format_labyrinth(cell **labyrinth, dimension size) {
 	}
 }
 
-/** print_labyrinth displays all symbol's cells
-* @param labyrinth array containing all the cells of the labyrinth
-* @param size labyrinth's dimension
-*/
 void print_labyrinth(cell **labyrinth, dimension size) {
 	
 	int i;

@@ -20,4 +20,4 @@ test_generator_labyrinth.o: $(SRC_TEST_LABYRINTH)/test_generator_labyrinth.c $(S
 	$(CC) $(CFLAGS) $< -c
 
 clean:
-	rm *.o ./labyrinth/*.o
+	rm *.o ./labyrinth/*.o $(EXEC)

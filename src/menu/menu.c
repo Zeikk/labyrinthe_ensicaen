@@ -30,11 +30,11 @@ int scan_menu(void) {
     do {
 
         if (choice != -1) {
-            printf("\nErreur: veuillez saisir un nombre entre 1 et 4:\n");
+            printf("\nError: please enter a number between 1 and 4:\n");
         } else {
-            printf("\nSaisir un nombre (1-4): \n");
+            printf("\nEnter a number (1-4): \n");
         }
-        scanf("%1d", &choice);
+        scanf("%d", &choice);
         clean_buffer();
 
     } while(choice <= 0 || choice >=5);
@@ -46,16 +46,16 @@ int scan_menu(void) {
 int display_menu(char *filename){
 
     system("clear");
-    printf("\n######### Menu de démarrage #########\n\n");
+    printf("\n######### Main Menu #########\n\n");
 
     if (filename != NULL) {
-        printf("\nLabyrinthe chargé: %s \n\n", filename);
+        printf("\nLoaded Labyrinth: %s \n\n", filename);
     }
 
-    printf("1. Créer labyrinthe \n");
-    printf("2. Charger labyrinthe \n");
-    printf("3. Jouer \n");
-    printf("4. Quitter \n");
+    printf("1. Create labyrinth \n");
+    printf("2. Load labyrinth \n");
+    printf("3. Play \n");
+    printf("4. Exit \n");
 
     return scan_menu();
 

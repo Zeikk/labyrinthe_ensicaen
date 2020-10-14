@@ -30,20 +30,15 @@ typedef struct {
 } dimension;
 
 /**
-* cell represents an array's cell
+* @struct cell
+* @brief Objet chaîne de caractères.
 */
 typedef struct {
-    /**
-    * @{
-    */
-    dimension coordinates; /** < cell's coordinates */
-    int value; /** < -1 if a border wall / 0 if an other wall / or others */
-    char symbol; /** < # for wall / X for bonus / Y for traps / space for others */
-    int containsPlayer; /** < boolean 1 if cell contains a player else 0 */
-    int is_special; /** 1 if the cell is a bonus or -1 if it's a trap else 0 */
-    /**
-    * @}
-    */
+    dimension coordinates; /**< cell's coordinates */
+    int value; /**< -1 if a border wall / 0 if an other wall / or others */
+    char symbol; /**< # for wall / X for bonus / Y for traps / space for others */
+    int containsPlayer; /**< boolean 1 if cell contains a player else 0 */
+    int is_special; /**< 1 if the cell is a bonus or -1 if it's a trap else 0 */
 
 } cell;
 
@@ -51,17 +46,17 @@ typedef struct {
 * labyrinth's parameters
 */
 typedef struct {
-    /**
-    * @{
-    */
-    dimension size; /** < labyrinth's size */
-    dimension start_labyrinth; /** < entree's coordinates */
-    dimension end_labyrinth; /** < end's coordinates */
-    /**
-    * @}
-    */
+
+    dimension size; /**< labyrinth's size */
+    dimension start_labyrinth; /**< entree's coordinates */
+    dimension end_labyrinth; /**< end's coordinates */
+
 } parameters_labyrinth;
 
+/** get_labyrinth initialize labyrinth
+* @param size labyrinth's dimension
+* @return labyrinth intialized or NULL
+*/
 cell** get_labyrinth(dimension size);
 
 #endif

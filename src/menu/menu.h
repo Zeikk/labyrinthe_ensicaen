@@ -22,6 +22,15 @@
 #ifndef MENU
 #define MENU
 
+/** scan_menu allows to select an menu option
+* @return user's choice between 1 and 4
+*/
+int scan_menu(void);
+
+/** display_menu displays the menu and the labyrinth loaded if filename is not NULL
+* @param filename a pointer describing a filename
+* @return scan_menu value
+*/
 int display_menu(char *filename);
 
 #endif

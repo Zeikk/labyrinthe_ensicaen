@@ -1,3 +1,23 @@
+/**
+* ENSICAEN
+* 6 Boulevard Maréchal Juin
+* F-14050 Caen Cedex
+*
+* This file is owned by ENSICAEN students. No portion of this
+* document may be reproduced, copied or revised without written
+* permission of the authors.
+*/
+
+/**
+* @author Loïck LEPRÉVOST <loick.leprevost@ecole.ensicaen.fr>
+* @version 1.2.0 2020-10-07
+*/
+
+/**
+* @file move_player.c
+* @brief functions to move a player on a labyrinth
+*/
+
 #include "./move_player.h"
 #include "./user_input.h"
 #include "../labyrinth/struct_labyrinth.h"
@@ -6,15 +26,16 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-#define VALUE_SPECIAL_CELL 1
+
+#define VALUE_SPECIAL_CELL 1 /*!<value of bonus and malus cells*/
 
 cell* get_player(cell **labyrinth, dimension size) {
 
     int i;
     int j;
-    for(i = 0; i<size.length; i++) {
-        for(j = 0; j<size.width; j++) {
-            if(labyrinth[i][j].containsPlayer == 1) {
+    for (i = 0; i<size.length; i++) {
+        for (j = 0; j<size.width; j++) {
+            if (labyrinth[i][j].containsPlayer == 1) {
                 return &labyrinth[i][j];
             }
         }
@@ -31,11 +52,11 @@ int is_win(cell player_cell, parameters_labyrinth parameters) {
 
 int check_is_special(cell* cell_check) {
 
-    if(cell_check->is_special == 1) {
+    if (cell_check->is_special == 1) {
         cell_check->is_special = 0;
         return cell_check->value * -1;
 
-    } else if(cell_check->is_special == -1) {
+    } else if (cell_check->is_special == -1) {
         cell_check->is_special = 0;
         return cell_check->value;
     }
@@ -51,7 +72,7 @@ int move_player(char move, cell* player_cell, cell **labyrinth, cell first_cell)
     cell* bot_cell = &labyrinth[player_cell->coordinates.length + 1][player_cell->coordinates.width];
     int cell_value = 0;
 
-    switch(move) {
+    switch (move) {
 
         case 'z':
             if(top_cell->value != -1 && top_cell->value != 0) {
@@ -109,13 +130,13 @@ int move(cell **labyrinth, parameters_labyrinth parameters) {
     cell* player_cell;
     int score = 0;
 
-    if(labyrinth == NULL ) {
+    if (labyrinth == NULL ) {
         perror("Labyrinth empty");
         return 0;
     }
 
     player_cell = get_player(labyrinth, parameters.size);
-    while(is_win(*player_cell, parameters) == 0) {
+    while (is_win(*player_cell, parameters) == 0) {
 
         system("clear");
         print_labyrinth(labyrinth, parameters.size);
@@ -123,7 +144,8 @@ int move(cell **labyrinth, parameters_labyrinth parameters) {
         printf("Score: %d \n", score);
         move = choose_move();
 
-        score += move_player(move, player_cell, labyrinth, labyrinth[parameters.start_labyrinth.length][parameters.start_labyrinth.width]);
+        score += move_player(move, player_cell, labyrinth,\
+        labyrinth[parameters.start_labyrinth.length][parameters.start_labyrinth.width]);
         score++;
         player_cell = get_player(labyrinth, parameters.size);
 
@@ -131,9 +153,9 @@ int move(cell **labyrinth, parameters_labyrinth parameters) {
 
     system("clear");
     print_labyrinth(labyrinth, parameters.size);
-    printf("C'est gagné. Score: %d\n", score);
+    printf("It's a win. Score: %d\n", score);
 
-    printf("\nAppuyer pour revenir au menu\n");
+    printf("\nPress to back to menu\n");
     clean_buffer();
 
     return score;
