@@ -35,7 +35,7 @@ cell* get_player(cell **labyrinth, dimension size) {
     int j;
     for (i = 0; i<size.length; i++) {
         for (j = 0; j<size.width; j++) {
-            if (labyrinth[i][j].containsPlayer == 1) {
+            if (labyrinth[i][j].contains_player == 1) {
                 return &labyrinth[i][j];
             }
         }
@@ -77,7 +77,7 @@ int move_player(char move, cell* player_cell, cell **labyrinth, cell first_cell)
         case 'z':
             if(top_cell->value != -1 && top_cell->value != 0) {
 
-                top_cell->containsPlayer = 1;
+                top_cell->contains_player = 1;
                 cell_value = check_is_special(top_cell);
 
             } else {
@@ -87,7 +87,7 @@ int move_player(char move, cell* player_cell, cell **labyrinth, cell first_cell)
         case 's':
             if(bot_cell->value != -1 && bot_cell->value != 0) {
 
-                bot_cell->containsPlayer = 1;
+                bot_cell->contains_player = 1;
                 cell_value = check_is_special(bot_cell);
 
             } else {
@@ -99,7 +99,7 @@ int move_player(char move, cell* player_cell, cell **labyrinth, cell first_cell)
             && (player_cell->coordinates.length != first_cell.coordinates.length
             || player_cell->coordinates.width != first_cell.coordinates.width)) {
 
-                left_cell->containsPlayer = 1;
+                left_cell->contains_player = 1;
                 cell_value = check_is_special(left_cell);
 
             } else {
@@ -109,7 +109,7 @@ int move_player(char move, cell* player_cell, cell **labyrinth, cell first_cell)
         case 'd':
             if(right_cell->value != -1 && right_cell->value != 0) {
 
-                right_cell->containsPlayer = 1;
+                right_cell->contains_player = 1;
                 cell_value = check_is_special(right_cell);
 
             } else {
@@ -120,7 +120,7 @@ int move_player(char move, cell* player_cell, cell **labyrinth, cell first_cell)
             return 0;
     }
 
-    player_cell->containsPlayer = 0;
+    player_cell->contains_player = 0;
     return cell_value;
 }
 

@@ -37,7 +37,7 @@ typedef struct {
     dimension coordinates; /**< cell's coordinates */
     int value; /**< -1 if a border wall / 0 if an other wall / or others */
     char symbol; /**< # for wall / X for bonus / Y for traps / space for others */
-    int containsPlayer; /**< boolean 1 if cell contains a player else 0 */
+    int contains_player; /**< boolean 1 if cell contains a player else 0 */
     int is_special; /**< 1 if the cell is a bonus or -1 if it's a trap else 0 */
 
 } cell;

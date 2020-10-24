@@ -1,0 +1,3 @@
+test_labyrinth
+testlabyrinth
+./test_labyrinth

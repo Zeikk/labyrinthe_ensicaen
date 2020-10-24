@@ -9,7 +9,7 @@
 */
 
 /**
-* @author Loïcl LEPRÉVOST <loick.leprevost@ecole.ensicaen.fr>
+* @author Loïck LEPRÉVOST <loick.leprevost@ecole.ensicaen.fr>
 * @version 2.0.1 2020-10-09
 */
 

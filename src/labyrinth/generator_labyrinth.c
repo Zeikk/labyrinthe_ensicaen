@@ -105,7 +105,7 @@ void fill_labyrinth(cell **labyrinth, dimension size) {
 				
 				labyrinth[i][j].value = 0;
 			}
-			labyrinth[i][j].containsPlayer = 0;
+			labyrinth[i][j].contains_player = 0;
 			labyrinth[i][j].is_special = 0;
 			labyrinth[i][j].coordinates.length = i;
 			labyrinth[i][j].coordinates.width = j;
@@ -157,7 +157,7 @@ void generate_labyrinth(cell **labyrinth, parameters_labyrinth parameters) {
 
 	/* create start and end*/
 	labyrinth[parameters.start_labyrinth.length][parameters.start_labyrinth.width].value = 1;
-	labyrinth[parameters.start_labyrinth.length][parameters.start_labyrinth.width].containsPlayer = 1;
+	labyrinth[parameters.start_labyrinth.length][parameters.start_labyrinth.width].contains_player = 1;
 	labyrinth[parameters.end_labyrinth.length][parameters.end_labyrinth.width].value = 1;
 
 }

@@ -33,7 +33,7 @@ void format_labyrinth(cell **labyrinth, dimension size) {
 			
 			if ((labyrinth[i][j].value == -1 || labyrinth[i][j].value == 0) && labyrinth[i][j].is_special == 0) {
 				labyrinth[i][j].symbol = '#';
-			} else if (labyrinth[i][j].containsPlayer) {
+			} else if (labyrinth[i][j].contains_player) {
 				labyrinth[i][j].symbol = 'o';
 			} else if (labyrinth[i][j].is_special == 1) {
 				labyrinth[i][j].symbol = 'X';

@@ -1,3 +1,13 @@
+/**
+* ENSICAEN
+* 6 Boulevard Maréchal Juin
+* F-14050 Caen Cedex
+*
+* This file is owned by ENSICAEN students. No portion of this
+* document may be reproduced, copied or revised without written
+* permission of the authors.
+*/
+
 #include "./test_generator_labyrinth.h"
 #include "../../includes/minunit.h"
 #include "../../src/labyrinth/struct_labyrinth.h"
@@ -132,12 +142,22 @@ MU_TEST(test_replace_cell) {
 MU_TEST(test_generate_labyrinth) {
 
     cell **test_labyrinth;
+    int tmp_start_cell;
+    int tmp_end_cell;
 
     test_labyrinth = get_labyrinth(parameters.size);
     generate_labyrinth(test_labyrinth, parameters);
-
+    
+    tmp_start_cell = test_labyrinth[parameters.start_labyrinth.length][parameters.start_labyrinth.width].value;
+    tmp_end_cell = test_labyrinth[parameters.end_labyrinth.length][parameters.end_labyrinth.width].value;
+    test_labyrinth[parameters.start_labyrinth.length][parameters.start_labyrinth.width].value = 0;
+    test_labyrinth[parameters.end_labyrinth.length][parameters.end_labyrinth.width].value = 0;
     mu_assert(verif_labyrinth(test_labyrinth, parameters.size), "labyrinth should be completed");
-    mu_assert(test_labyrinth[parameters.start_labyrinth.length][parameters.start_labyrinth.width].containsPlayer == 1, "start_labyrinth should contains player");
+
+    test_labyrinth[parameters.start_labyrinth.length][parameters.start_labyrinth.width].value = tmp_start_cell;
+    test_labyrinth[parameters.end_labyrinth.length][parameters.end_labyrinth.width].value = tmp_end_cell;
+
+    mu_assert(test_labyrinth[parameters.start_labyrinth.length][parameters.start_labyrinth.width].contains_player == 1, "start_labyrinth should contains player");
     mu_assert(test_labyrinth[parameters.start_labyrinth.length][parameters.start_labyrinth.width].value == 1, "start_labyrinth should be equal to 1");
     mu_assert(test_labyrinth[parameters.end_labyrinth.length][parameters.end_labyrinth.width].value == 1, "end_labyrinth should be equal to 1");
 }
